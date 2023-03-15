@@ -7,10 +7,10 @@ export class RegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            apiKey: null,
-            dappName: null,
-            dappPackageName: null,
-            notificationConfig: null,
+            apiKey: "",
+            dappName: "",
+            dappPackageName: "",
+            notificationConfig: "",
             registrationRequestWaiting: false,
             errorMessage: null,
             successMessage: null
