@@ -25,6 +25,8 @@ class FirebaseAdmin:
         return cls.__singleton_instance
 
     def initialize_app(self):
+        if self.app is not None:
+            return
         print("Initialising Firebase..")
         self.app = initialize_app(self.credentials)
 
