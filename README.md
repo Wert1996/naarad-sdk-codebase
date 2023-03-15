@@ -1,8 +1,10 @@
 # Naarad sdk
 This repository completes code for Naarad SDK's backend lambdas, kotlin SDK and website. This is meant for review by the hackathon judges. For the Naarad Kotlin SDK library, refer to this repo: https://github.com/Wert1996/Naarad-kotlin-sdk.
-This repository contains the following three code bases.
 
 Website Link: https://d3bhwtjk5vuhv4.cloudfront.net/
+
+
+This repository contains the following three code bases.
 
 ## Naarad backend lambdas
 
