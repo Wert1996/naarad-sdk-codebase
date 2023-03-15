@@ -1,7 +1,10 @@
 # Naarad sdk
-This repository completes code for Naarad SDK's backend lambdas, kotlin SDK and website. This is meant for review by the hackathon judges. For the Naarad Kotlin SDK library, refer to this repo: https://github.com/Wert1996/Naarad-kotlin-sdk.
 
-Website Link: https://d3bhwtjk5vuhv4.cloudfront.net/
+![Image not found](https://i.imgur.com/imGjPV3.png)
+
+This repository contains the complete code for Naarad SDK's backend lambdas, kotlin SDK and website. This repo is meant for review by the hackathon judges. For the Naarad Kotlin SDK library, refer to this repo: [link](https://github.com/Wert1996/Naarad-kotlin-sdk).
+
+Website : [Link](https://d3bhwtjk5vuhv4.cloudfront.net/)
 
 
 This repository contains the following three code bases.
@@ -33,8 +36,10 @@ This is a lambda layer that contains many helper classes and utilities, used by 
 
 ## Naarad Kotlin SDK
 
-This is the Kotlin module for using Naarad on android devices.
+This is the Kotlin module for using Naarad on android devices. The main repo for the Kotlin SDK is [here](https://github.com/Wert1996/Naarad-kotlin-sdk). Refer to the main repo for more information on how to integrate the SDK.
 
 ## Naarad UI
 
 The UI built on React, html and CSS for the Naarad website.
+Sample screenshot of the UI:
+![Image not found](https://i.imgur.com/sGe9ict.png)
