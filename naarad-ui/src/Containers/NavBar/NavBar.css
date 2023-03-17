@@ -1,0 +1,39 @@
+.collapsible-menu-container {
+    z-index: 1001;
+    left: 0 !important;
+    bottom: 0 !important;
+    top: 0 !important;
+    position: fixed !important;
+    overflow: hidden;
+    background-color: black;
+    opacity: 90%;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+    color: white;
+}
+.clickable-collapse-div {
+    cursor: pointer;
+}
+.cross-item {
+    text-align: right;
+    color: white;
+    width: auto;
+    height:auto;
+    cursor: pointer;
+    padding: 20px
+}
+.collapsible-menu {
+    overflow: auto;
+    position: absolute !important;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: white;
+    font-size: 25px;
+}
+.collapsible-menu-item {
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}

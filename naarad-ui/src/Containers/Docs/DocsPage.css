@@ -62,16 +62,33 @@
 
 .docHeading {
     font-weight: 700;
-    font-size: 35px;
     margin-bottom: 80px;
 }
 .docSubHeading {
     font-weight: 600;
-    font-size: 25px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
-.docContent {
-    font-weight: 400;
-    font-size: 19px;
+@media screen and (max-width: 575px) {
+    .docContent {
+        font-size: 12px;
+    }
+    .docSubHeading {
+        font-size: 18px;
+    }
+    .docHeading {
+        font-size: 25px;
+    }
+}
+@media screen and (min-width: 575px) {
+    .docContent {
+        font-weight: 400;
+        font-size: 19px;
+    }
+    .docSubHeading {
+        font-size: 25px;
+    }
+    .docHeading {
+        font-size: 35px;
+    }
 }

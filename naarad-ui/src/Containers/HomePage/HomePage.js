@@ -1,14 +1,10 @@
 import React from "react";
 import "./HomePage.css"
-// import homePageStyles from "./HomePage.module.css"
 import naaradLogo from "../../Assets/Images/naaradLogo.png"
 import keyImg from "../../Assets/Images/keyImg.png"
 import registerImg from "../../Assets/Images/registerImg.png"
 import codeImg from "../../Assets/Images/codeImg.png"
 import { Link } from "react-router-dom";
-// import commonStyles from "../../Assets/Styles/Common.module.css"
-// let styles = {}
-// Object.assign(styles, homePageStyles, commonStyles)
 
 
 export class HomePage extends React.Component {
@@ -23,26 +19,26 @@ export class HomePage extends React.Component {
       <div className={"u-clearfix" + " u-sheet" + " u-sheet-1"}>
         <h3 className={"u-custom-font" + " u-font-montserrat" + " u-text" + " u-text-body-color" + " u-text-1"}>Naarad</h3>
         <h2 className={"u-custom-font" + " u-font-montserrat" + " u-text" + " u-text-2"}>SDK</h2>
-        <div className={"u-list" + " u-list-1"}>
-          <div className={"u-repeater" + " u-repeater-1"}>
-            <div className={"u-align-left" + " u-container-style" + " u-list-item" + " u-repeater-item" + " u-shape-rectangle"}>
-              <div className={"u-container-layout" + " u-similar-container" + " u-container-layout-1"}>
-                <div className={"u-black" + " u-shape" + " u-shape-rectangle" + " u-shape-1"}></div>
-                <p className={"u-text" + " u-text-3"}> Simple, scalable mobile notifications SDK for your Decentralised applications.</p>
-              </div>
-            </div>
-            <div className={"u-align-left" + " u-container-style" + " u-list-item" + " u-repeater-item" + " u-shape-rectangle"}>
-              <div className={"u-container-layout" + " u-similar-container" + " u-container-layout-2"}>
-                <div className={"u-black" + " u-shape" + " u-shape-rectangle" + " u-shape-2"}></div>
-                <p className={"u-text" + " u-text-4"}> Using Naarad, adding a push notification system to your mobile dApp becomes easier than ever before. </p>
-              </div>
-            </div>
+        <div className="intro-div">
+        {/* <img className={"u-image" + " u-image-contain" + " u-image-default" + " u-preserve-proportions" + " u-image-1"} src={naaradLogo} alt="" data-image-width="500" data-image-height="500"/> */}
+        <div className="intro-logo-div">
+          <img className={"intro-logo"} src={naaradLogo} alt="" data-image-width="500" data-image-height="500"/>
+        </div>
+        <div className="intro-content-div">
+          <div className="intro-content-item">
+            <div className="black-bar"></div>
+            <div className="text"><p>Simple, scalable mobile notifications SDK for your Decentralised applications.</p></div>
+          </div>
+          <div className="intro-content-item">
+            <div className = "black-bar"></div>
+            <div className="text"><p>Using Naarad, adding a push notification system to your mobile dApp becomes easier than ever before.</p></div>
+          </div>
+          <div className="intro-content-item" style={{marginBottom: "160px"}}>
+            <div className = "black-bar"></div>
+            <div className="text"><p>Let the god of push notifications handle it for you.:&nbsp;<br/>- Setting blockchain listeners.&nbsp;<br/>- Maintaining user device - info&nbsp;<br/>- Backend infrastructure to send notifications&nbsp;<br/>- Only a few lines of code to set up your client mobile app.</p></div>
           </div>
         </div>
-        <img className={"u-image" + " u-image-contain" + " u-image-default" + " u-preserve-proportions" + " u-image-1"} src={naaradLogo} alt="" data-image-width="500" data-image-height="500"/>
-        <div className={"u-black" + " u-shape" + " u-shape-rectangle" + " u-shape-3"}></div>
-        <p className={"u-text" + " u-text-5"}> Let the god of push notifications handle it for you.:&nbsp;<br/>- Setting blockchain listeners.&nbsp;<br/>- Maintaining user device - info&nbsp;<br/>- Backend infrastructure to send notifications&nbsp;<br/>- Only a few lines of code to set up your client mobile app.
-        </p>
+        </div>
       </div>
     </section>
     <section className={"u-clearfix" + " u-section-2"} id="sec-846c">
