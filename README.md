@@ -41,5 +41,7 @@ This is the Kotlin module for using Naarad on android devices. The main repo for
 ## Naarad UI
 
 The UI built on React, html and CSS for the Naarad website.
+Further changes in the UI have made it responsive, with a collapsible menu bar for the mobile website. 
+
 Sample screenshot of the UI:
 ![Image not found](https://i.imgur.com/sGe9ict.png)
