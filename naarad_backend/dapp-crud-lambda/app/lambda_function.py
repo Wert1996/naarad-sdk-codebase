@@ -1,51 +1,69 @@
 import json
-from dao.dapp import Dapp
-from naarad_common.auth.simple_auth import SimpleAuth
-from naarad_common.utils.misc_utils import MiscUtils
+
+from naarad_common.auth.api_key_auth import Auth
+from naarad_common.exceptions.authorization_exception import AuthException
+
+from activities.delete_dapp import DeleteDappActivity
+from activities.edit_dapp import EditDappActivity
+from activities.get_dapp import GetDappActivity
+from activities.post_dapp import PostDapp
+from model.delete_dapp_input import DeleteDappInput
+from model.edit_dapp_input import EditDappInput
+from model.get_dapp_input import GetDappInput
+from model.post_dapp_input import PostDappInput
+
+
+METHOD_DICT = {
+        "POST": {
+            "activity": PostDapp,
+            "input": PostDappInput
+        },
+        "GET": {
+            "activity": GetDappActivity,
+            "input": GetDappInput
+        },
+        "PUT": {
+            "activity": EditDappActivity,
+            "input": EditDappInput
+        },
+        "DELETE": {
+            "activity": DeleteDappActivity,
+            "input": DeleteDappInput
+        }
+    }
+
+COMMON_HEADERS = {
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*'
+}
 
 
 def lambda_handler(event, context):
-    dapp = Dapp()
-    method, path_parameters, query_string_parameters, body, headers = MiscUtils.parse_event(event)
-    if not SimpleAuth().authorize_using_key(headers.get("Authorization")):
+    try:
+        user = Auth().get_user(event)
+    except AuthException as e:
+        print("Headers", event.get("headers"))
         return {
             "statusCode": 401,
-            "body": json.dumps({
-                "message": "The API key provided is not valid."
-            })
+            "message": json.dumps({"message": str(e)})
         }
-    try:
-        if method == "POST":
-            method_response = dapp.post(path_parameters, query_string_parameters, body)
-        elif method == "GET":
-            method_response = dapp.get(query_string_parameters)
-        elif method == "PUT":
-            method_response = dapp.put(path_parameters, query_string_parameters, body)
-        elif method == "DELETE":
-            method_response = dapp.delete(path_parameters, query_string_parameters, body)
-        else:
-            return {
-                'statusCode': 404,
-                'body': json.dumps('Method is not available. Allowed methods: POST, GET, PUT, DELETE, OPTIONS')
-            }
-    except Exception as e:
-        print(e)
+    http_method = event.get("httpMethod")
+    if http_method not in METHOD_DICT:
         return {
-            'statusCode': 400,
-            'body': json.dumps({"message": str(e)})
+            "statusCode": 405,
+            "message": "Method not allowed.",
+            "headers": COMMON_HEADERS
         }
+    activity, api_input = METHOD_DICT[http_method]["activity"], METHOD_DICT[http_method]["input"]
+    method_response = activity().run(user, api_input(event))
     return {
-        'statusCode': 200,
-        'body': json.dumps(method_response),
-        'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': '*'
-        }
+        **method_response,
+        "headers": COMMON_HEADERS
     }
 
 
 if __name__ == "__main__":
-    event = {'resource': '/dapp', 'path': '/dapp/', 'httpMethod': 'POST', 'headers': {'accept': 'application/json, text/plain, */*', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8', 'Authorization': 'AIzaSyCVYqzdB6i-htLOoiA6In7bU4FtolhGLUs', 'content-type': 'application/json', 'Host': 'eh9tvxkypk.execute-api.us-east-1.amazonaws.com', 'origin': 'http://localhost:3000', 'referer': 'http://localhost:3000/', 'sec-ch-ua': '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'cross-site', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'X-Amzn-Trace-Id': 'Root=1-640ed9af-2ce68f15008ea37f15e24ab7', 'X-Forwarded-For': '49.36.185.230', 'X-Forwarded-Port': '443', 'X-Forwarded-Proto': 'https'}, 'multiValueHeaders': {'accept': ['application/json, text/plain, */*'], 'accept-encoding': ['gzip, deflate, br'], 'accept-language': ['en-GB,en-US;q=0.9,en;q=0.8'], 'Authorization': ['AIzaSyCVYqzdB6i-htLOoiA6In7bU4FtolhGLUs'], 'content-type': ['application/json'], 'Host': ['eh9tvxkypk.execute-api.us-east-1.amazonaws.com'], 'origin': ['http://localhost:3000'], 'referer': ['http://localhost:3000/'], 'sec-ch-ua': ['"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"'], 'sec-ch-ua-mobile': ['?0'], 'sec-ch-ua-platform': ['"macOS"'], 'sec-fetch-dest': ['empty'], 'sec-fetch-mode': ['cors'], 'sec-fetch-site': ['cross-site'], 'User-Agent': ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'], 'X-Amzn-Trace-Id': ['Root=1-640ed9af-2ce68f15008ea37f15e24ab7'], 'X-Forwarded-For': ['49.36.185.230'], 'X-Forwarded-Port': ['443'], 'X-Forwarded-Proto': ['https']}, 'queryStringParameters': None, 'multiValueQueryStringParameters': None, 'pathParameters': None, 'stageVariables': None, 'requestContext': {'resourceId': 'ljc62u', 'resourcePath': '/dapp', 'httpMethod': 'POST', 'extendedRequestId': 'BtbzbGyDIAMF4Hw=', 'requestTime': '13/Mar/2023:08:07:11 +0000', 'path': '/dev/dapp/', 'accountId': '588747065691', 'protocol': 'HTTP/1.1', 'stage': 'dev', 'domainPrefix': 'eh9tvxkypk', 'requestTimeEpoch': 1678694831211, 'requestId': '55c8fd8c-5fa3-475d-8a54-58c3e5b898ac', 'identity': {'cognitoIdentityPoolId': None, 'accountId': None, 'cognitoIdentityId': None, 'caller': None, 'sourceIp': '49.36.185.230', 'principalOrgId': None, 'accessKey': None, 'cognitoAuthenticationType': None, 'cognitoAuthenticationProvider': None, 'userArn': None, 'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'user': None}, 'domainName': 'eh9tvxkypk.execute-api.us-east-1.amazonaws.com', 'apiId': 'eh9tvxkypk'}, 'body': '{"dapp_name":"someNewDapp","dapp_package_name":"com.example.anotherTest","notification_config":"{\\n}"}', 'isBase64Encoded': False}
-    response = lambda_handler(event, "")
+    event = {"resource": "/dapp", "path": "/dapp", "httpMethod": "GET", "headers": {"Accept-Encoding": "gzip", "Authorization": "Basic 2d961857-02a6-44ab-85a4-fea22e2b4d26", "Host": "eh9tvxkypk.execute-api.us-east-1.amazonaws.com", "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 10; SM-G960F Build/QP1A.190711.020)", "X-Amzn-Trace-Id": "Root=1-6422972d-4a02386d197ac4bd7788004f", "X-Forwarded-For": "49.36.187.240", "X-Forwarded-Port": "443", "X-Forwarded-Proto": "https"}, "multiValueHeaders": {"Accept-Encoding": ["gzip"], "Authorization": ["Basic 2d961857-02a6-44ab-85a4-fea22e2b4d26"], "Host": ["eh9tvxkypk.execute-api.us-east-1.amazonaws.com"], "User-Agent": ["Dalvik/2.1.0 (Linux; U; Android 10; SM-G960F Build/QP1A.190711.020)"], "X-Amzn-Trace-Id": ["Root=1-6422972d-4a02386d197ac4bd7788004f"], "X-Forwarded-For": ["49.36.187.240"], "X-Forwarded-Port": ["443"], "X-Forwarded-Proto": ["https"]}, "queryStringParameters": {"name": "androidTrial28?complete=True"}, "multiValueQueryStringParameters": {"name": ["androidTrial28?complete=True"]}, "pathParameters": None, "stageVariables": None, "requestContext": {"resourceId": "ljc62u", "resourcePath": "/dapp", "httpMethod": "GET", "extendedRequestId": "CeyPFH7KIAMF1pA=", "requestTime": "28/Mar/2023:07:28:45 +0000", "path": "/dev/dapp", "accountId": "588747065691", "protocol": "HTTP/1.1", "stage": "dev", "domainPrefix": "eh9tvxkypk", "requestTimeEpoch": 1679988525031, "requestId": "03febbc6-5230-4600-be58-c9f460792e09", "identity": {"cognitoIdentityPoolId": None, "accountId": None, "cognitoIdentityId": None, "caller": None, "sourceIp": "49.36.187.240", "principalOrgId": None, "accessKey": None, "cognitoAuthenticationType": None, "cognitoAuthenticationProvider": None, "userArn": None, "userAgent": "Dalvik/2.1.0 (Linux; U; Android 10; SM-G960F Build/QP1A.190711.020)", "user": None}, "domainName": "eh9tvxkypk.execute-api.us-east-1.amazonaws.com", "apiId": "eh9tvxkypk"}, "body": None, "isBase64Encoded": False}
+    response = lambda_handler(event, None)
     print(response)
