@@ -19,7 +19,7 @@ export class NaaradApiResource {
             "notification_config": notificationConfig
         }
         const headers = {
-            "Authorization": apiKey
+            "Authorization": "Basic " + apiKey
         }
         return axios.post(dappResourceUrl, data, {headers: headers})
     }

@@ -40,7 +40,7 @@ export class SetupDocs extends React.Component {
                 <pre className="prettyprint">
                     {code_1}
                 </pre> 
-                In your <b>module (app-level) Gradle file</b>, add the dependencies for the Naarad SDK.
+                In your <b>module (app-level) Gradle file</b>, add the dependencies for the Naarad SDK. You can also use any particular version of the SDK by picking a commit from here: <a href="https://github.com/Wert1996/Naarad-kotlin-sdk" target="_blank">SDK repo</a>. Replace <code>main-snapshot</code> with the required commit hash.
                 <pre className="prettyprint">{code_2}
                 </pre>
                 <br/> Do not forget to sync your project files.

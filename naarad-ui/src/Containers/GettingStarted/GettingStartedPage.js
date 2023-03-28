@@ -43,8 +43,7 @@ export class GettingStartedPage extends React.Component {
                       <div className={"u-accordion-pane" + "  u-align-left" + "  u-container-style" + "  u-custom-color-2" + "  u-accordion-pane-1" + (this.state.selected === "step-1" ? " u-accordion-active": "")} id="accordion-7c0e" aria-labelledby="link-accordion-7c0e">
                         <div className={"u-container-layout" + "  u-valign-top" + "  u-container-layout-2"}>
                           <p className={"u-text" + "  u-text-1"}>You will need an API key to register your dApp with Naarad, and also to setup Naarad in your dApp.</p>
-                          <p className={"u-text" + "  u-text-2"}> For now, you will have to request an API key manually by contacting <span style={{fontWeight: "700"}} className={"u-text-palette-1-base"}>wert#9273</span> on Discord. In the future, you should be able to do it through this portal by linking your wallet.
-                          </p>
+                          <p className={"u-text" + "  u-text-2"}> Head over to the developer portal (in the navigation bar) to get an API key and also create a dApp. Otherwise, you can also request an API key manually by contacting <span style={{fontWeight: "700"}} className={"u-text-palette-1-base"}>wert#9273</span> on Discord.</p>
                         </div>
                       </div>
                     </div>
@@ -58,7 +57,7 @@ export class GettingStartedPage extends React.Component {
                             <li>
                               <div className={"u-list-icon"}>
                                 <div xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" xmlSpace="preserve" className={"u-svg-content"}>–</div>
-                              </div>Already have an API key ? Submit the information below to register a new dApp with Naarad.
+                              </div>Already have an API key ? Submit the information below to register a new dApp with Naarad. You can also use the DEVELOPER PORTAL in the navigation bar above to create, edit and delete your dApps.
                             </li>
                           </ul>
 

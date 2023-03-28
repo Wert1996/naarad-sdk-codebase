@@ -8,7 +8,8 @@ export class RegisterDocs extends React.Component {
                 Registering your dApp
             </div>
             <div className="docContent">
-                <b>Note: For registering, an API key is required. Contact @wert#9273 on Discord in order to request an API key.</b>
+                <b>NOTE: You can perform the below steps, or easier, you can head to the <a href="https://dev.naaradsdk.click" target="_blank">DEVELOPER PORTAL</a> and manage your API keys, dApps and track your usage.</b>
+                <br/><br/><b>For registering, an API key is required. Contact @wert#9273 on Discord in order to request an API key.</b>
                 <br></br><br></br>
                 You will need to register your mobile application in order to start receiving push notifications from Naarad.
                 <br/>In order to register, go to the <Link to="/getting_started">Getting Started</Link> page and complete the Registration step.

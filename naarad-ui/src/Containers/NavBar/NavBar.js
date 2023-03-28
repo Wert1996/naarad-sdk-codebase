@@ -1,10 +1,7 @@
 import React from "react";
 import naaradLogo from "../../Assets/Images/naaradLogo.png"
 import { Link } from "react-router-dom"
-// import styles from "../../Assets/Styles/Common.module.css"
-// import "../../Assets/Styles/Common.css"
 import "./NavBar.css"
-
 
 export class NavBar extends React.Component {
     constructor(props) {
@@ -58,7 +55,8 @@ export class NavBar extends React.Component {
             </li><li className={'u-nav-item'}><Link className={'u-button-style' + ' u-nav-link' + ' u-text-active-palette-1-base' + ' u-text-hover-palette-2-base'} to="getting_started" style={{padding: "10px 20px"}}>Get Started</Link>
             </li><li className={'u-nav-item'}><Link className={'u-button-style' + ' u-nav-link' + ' u-text-active-palette-1-base' + ' u-text-hover-palette-2-base'} to="docs" style={{padding: "10px 20px"}}>Docs</Link>
             </li><li className={'u-nav-item'}><Link className={'u-button-style' + ' u-nav-link' + ' u-text-active-palette-1-base' + ' u-text-hover-palette-2-base'} to="contact" style={{padding: "10px 20px"}}>Contact</Link>
-            </li></ul>
+            </li><li className={'u-nav-item'}><a href="https://dev.naaradsdk.click"><button className="devPortalButton">DEVELOPER PORTAL</button></a></li>
+            </ul>
           </div>
           <div className="collapsible-menu-container" style={{width: this.state.collapsible_menu ? "300px": "0px", padding: this.state.collapsible_menu ? "30px": "0px"}}>
             {this.state.collapsible_menu ? 
