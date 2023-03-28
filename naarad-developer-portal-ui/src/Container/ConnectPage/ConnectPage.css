@@ -1,0 +1,105 @@
+.header-div {
+    height: 5vh;
+    padding: 10px;
+}
+.main-div {
+    background-color: #db545a;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+.main-div .title-1 {
+    font-size: 8.125rem;
+    /* margin: 60px 326px 0 0; */
+    font-family: Montserrat,sans-serif!important;
+    color: #111;
+    font-weight: 700;
+    margin-left: 200px;
+    position: absolute;
+}
+.main-div .title-2 {
+    font-size: 8.125rem;
+    font-family: Montserrat,sans-serif!important;
+    color: white;
+    font-weight: 700;
+    margin-left: 400px;
+    position: absolute;
+    margin-top: 100px;
+}
+@media screen and (max-width: 1200px) {
+    .main-div .title-1 {
+        margin-left: 50px
+    }
+    .main-div .title-2 {
+        margin-left: 200px
+    }
+}
+.messageContainerDiv {
+    /* height: 100vh; */
+    /* width: 100vw; */
+    padding: 20px;
+}
+.heading-div {
+    height: 300px;
+    width: 100vw;
+    margin-top: 100px;
+    position: relative;
+}
+@media screen and (min-width: 1000px){
+    .messageContainerDiv {
+        display: flex;
+    }
+}
+.sideMessageDiv {
+    flex: 1;
+    margin-top: 100px;
+    /* width: 50%; */
+}
+@media screen and (min-width: 1200px) {
+    .naaradLogoDiv {
+        margin-left: 150px;
+        /* margin-top: 200px; */
+        flex: 0 1 600px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .naaradLogoDiv {
+        margin-left: 50px;
+        /* margin-top: 200px; */
+        width: 400px
+    }
+}
+.connectMessageDiv {
+    text-align: center;
+    margin-left: 0px;
+    font-family: Ubuntu,sans-serif!important;
+    color: white;
+    padding: 10px;
+    margin-bottom: 150px;
+}
+@media screen and (min-width: 1200px) {
+    .connectMessageDiv {
+        margin-left: -320px;
+    }
+}
+.connectMessageDiv .welcome{
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding: 10px;
+}
+.connectMessageDiv .connect {
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.connectWalletButton {
+    float: right;
+    margin-right: 150px;
+    /* margin-left: 440px;
+    margin-top: 50px;
+    position: relative; */
+    /* left: 50%;
+    -ms-transform: translateX(50%);
+    transform: translateX(50%); */
+}

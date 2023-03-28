@@ -1,0 +1,29 @@
+.deleteBox {
+    /* padding: 80px; */
+    background-color: white;
+    border-radius: 10px;
+}
+.alertBoxHeading {
+    padding: 20px 0px 20px 20px;
+    background-color: #db545a;
+    color: white;
+    font-weight: 700;
+    font-size: 22px;
+    border-radius: 10px 10px 0px 0px;
+}
+.deleteButton {
+    background-color: #db545a;
+    border: 0px;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.dialogDiv {
+    padding: 30px 20px 30px 20px;
+    font-weight: 600;
+}
+.deleteButtonDiv {
+    padding: 10px 0px 20px 20px;
+}
