@@ -24,7 +24,7 @@ This lambda is composed of the device registration API. This is used by the Kotl
 
 #### Dapp CRUD Lambda
 
-This lambda handles CRUD operations on dApps. For now, it supports POST and GET operations on dApps.
+This lambda handles CRUD operations on dApps. Refactored to have separate modules for input, activities and validators.
 
 #### Register New Accounts Lambda
 
@@ -33,6 +33,10 @@ This lambda runs every 1 minute based on an event bridge rule. It receives messa
 #### Naarad Common
 
 This is a lambda layer that contains many helper classes and utilities, used by all the above lambdas.
+
+#### Naarad Auth Lambda
+
+Tasked with the responsibility of authenticating users in the developer portal.
 
 ## Naarad Kotlin SDK
 
@@ -45,3 +49,15 @@ Further changes in the UI have made it responsive, with a collapsible menu bar f
 
 Sample screenshot of the UI:
 ![Image not found](https://i.imgur.com/sGe9ict.png)
+
+## Naarad Developer Portal UI
+
+Website: [Link](https://dev.naaradsdk.click)
+
+This UI has been built on React, HTML and CSS.
+
+The portal is to be used to manage Naarad API keys, dApps created by the user and usage tracking. Currently a WIP, users can still completely control their Naarad resources to be able to easily integrate Naarad using the UI.
+
+![Image not found](https://i.imgur.com/ontYJuk.png)
+
+
