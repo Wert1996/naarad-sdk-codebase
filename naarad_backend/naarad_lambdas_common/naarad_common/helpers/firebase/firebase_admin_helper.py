@@ -83,4 +83,32 @@ class FirebaseAdmin:
             raise Exception("Error while trying to register new dApp")
         return operation_response.get("response")
 
+    def delete_app_from_project(self, app_id):
+        url = FIREBASE_PROJECT_URL + "androidApps/" + app_id + ":remove"
+        headers = {
+            "Authorization": f"Bearer {self.api_access_token}"
+        }
+        body = {
+            "immediate": True
+        }
+        print(f"Deleting app with id {app_id}")
+        response = requests.post(url, headers=headers, json=body)
+        if response.status_code != 200:
+            print(f"Response from firebase: {response.status_code}, {response.headers}, {response.content}")
+            print("App could not be deleted from firebase project.")
+            raise Exception(f"App could not be deleted.")
+        response_json = response.json()
+        if response_json.get("done"):
+            return
+        operation_response = self.wait_till_operation_completes(response_json.get("name"))
+        if "error" in operation_response:
+            print("Error while trying to delete app from project.")
+            raise Exception("Error while trying to delete dApp")
+        return
 
+
+if __name__ == "__main__":
+    helper = FirebaseAdmin.get_instance()
+    # helper.delete_app_from_project("1:192680137882:android:bb293027811df5eb767b23")
+    helper.delete_app_from_project("1:617028171358:android:9a8f498e494f141fffe6cf")
+    # helper.add_app_to_project("appAddedForDeletion1", "com.example.appAddedForDeletion1")

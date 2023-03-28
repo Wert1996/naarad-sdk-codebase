@@ -38,8 +38,11 @@ class DynamoDBHelper:
             print(e)
             raise RuntimeError(e)
 
-    def delete_item(self, key_name: str, value):
-        self.table.delete_item(Key={key_name: value})
+    def delete_item(self, key_name: str, value, sort_key=None, sort_key_value=None):
+        if sort_key:
+            self.table.delete_item(Key={key_name: value, sort_key: sort_key_value})
+        else:
+            self.table.delete_item(Key={key_name: value})
 
     def query_items(self, index_name: str, key_name: str, value):
         response = self.table.query(

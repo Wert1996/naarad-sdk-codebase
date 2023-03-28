@@ -1,5 +1,5 @@
 from naarad_common.helpers.aws.secrets_helper import SecretsManagerHelper
-from naarad_common.utils.common_constants import API_KEY_SECRET_NAME
+from naarad_common.utils.common_constants import FIREBASE_API_KEY_SECRET_NAME
 
 
 class SimpleAuth:
@@ -10,7 +10,7 @@ class SimpleAuth:
     def get_api_key(self):
         if self.api_key is not None:
             return self.api_key
-        self.api_key = self.secrets_helper.get_secret(API_KEY_SECRET_NAME)
+        self.api_key = self.secrets_helper.get_secret(FIREBASE_API_KEY_SECRET_NAME)
         return self.api_key
 
     def authorize_using_key(self, api_key):
