@@ -1,26 +1,30 @@
 import json
 from queue import Queue
+
+from naarad_common.auth.api_key_auth import Auth
+
 from worker.chainEventProcessor import ChainEventProcessorThread
 from naarad_common.helpers.aws.ddb_helper import DynamoDBHelper
-from naarad_common.helpers.firebase.firebase_admin import FirebaseAdmin
+from naarad_common.helpers.firebase.firebase_admin_helper import FirebaseAdmin
 from notifiers.firebase_notifier import FirebaseNotifier
-from naarad_common.utils.common_constants import DEVICES_TABLE_NAME, DAPP_TABLE_NAME
+from naarad_common.utils.common_constants import DEVICES_TABLE_NAME, DAPP_TABLE_NAME, AUTH_TABLE_NAME
 from naarad_common.auth.simple_auth import SimpleAuth
 
 THREAD_LIMIT = 4
 
 
 def execute_worker_threads(event_queue):
-    devices_table_helper, dapp_table_helper = DynamoDBHelper.get_instance(DEVICES_TABLE_NAME), \
-        DynamoDBHelper.get_instance(DAPP_TABLE_NAME)
+    devices_table_helper, dapp_table_helper, auth_table_helper = DynamoDBHelper.get_instance(DEVICES_TABLE_NAME), \
+        DynamoDBHelper.get_instance(DAPP_TABLE_NAME), DynamoDBHelper.get_instance(AUTH_TABLE_NAME)
 
     firebase_admin = FirebaseAdmin.get_instance()
     firebase_admin.initialize_app()
     firebase_notifier = FirebaseNotifier(firebase_admin.app)
-    auth = SimpleAuth()
+    auth = Auth()
     thread_list = []
     for i in range(THREAD_LIMIT):
-        thread = ChainEventProcessorThread(event_queue, auth, devices_table_helper, dapp_table_helper, firebase_notifier)
+        thread = ChainEventProcessorThread(event_queue, auth, devices_table_helper,
+                                           dapp_table_helper, firebase_notifier)
         thread.start()
         thread_list.append(thread)
     list(map(lambda worker_thread: worker_thread.join(), thread_list))
